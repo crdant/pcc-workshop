@@ -8,3 +8,6 @@ applications:
   buildpack: java_buildpack_offline
   env:
     JAVA_OPTS: -Djava.security.egd=file:///dev/urandom
+  timeout: 300
+  services:
+    - workshop-db

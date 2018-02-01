@@ -1,0 +1,12 @@
+---
+spring:
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+
+
+# turn off the security on the actuator end points as this is a demo app
+management:
+  security:
+    enabled: false
