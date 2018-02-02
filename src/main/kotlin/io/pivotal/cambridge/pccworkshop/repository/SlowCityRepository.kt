@@ -1,4 +1,4 @@
 package io.pivotal.cambridge.pccworkshop.repository
 
-class SlowCityRepository {
+class SlowCityRepository ( delegate : CityRepository ) : CityRepository by delegate {
 }
