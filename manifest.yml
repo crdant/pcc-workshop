@@ -11,3 +11,4 @@ applications:
   timeout: 300
   services:
     - workshop-db
+    - workshop-cache
