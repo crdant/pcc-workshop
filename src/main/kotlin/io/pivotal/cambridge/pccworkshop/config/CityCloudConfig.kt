@@ -19,28 +19,37 @@ import org.apache.geode.distributed.Locator.getLocators
 import io.pivotal.spring.cloud.service.common.GemfireServiceInfo
 import org.apache.geode.cache.client.ClientCacheFactory
 import org.springframework.cloud.Cloud
-
-
+import org.springframework.cloud.config.java.AbstractCloudConfig
+import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils
+import org.springframework.core.io.ClassPathResource
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator
+import java.net.URI
+import javax.sql.DataSource
 
 
 @Configuration
 @EnableCaching
 @Profile("cloud")
-class CityCloudConfig {
-
+class CityCloudConfig : AbstractCloudConfig() {
 
     private val SECURITY_CLIENT = "security-client-auth-init"
     private val SECURITY_USERNAME = "security-username"
     private val SECURITY_PASSWORD = "security-password"
 
+    val dataSource : DataSource
+        @Bean(name = [ "jpaStore" ])
+        get () {
+            return connectionFactory().dataSource()
+        }
       val gemfireClientCache: ClientCache
         @Bean(name = [ "gemfireCache" ])
         get() {
             val cloudFactory = CloudFactory()
             val cloud = cloudFactory.cloud
-            val cacheService = cloud.getServiceInfo("workshop-cache") as GemfireServiceInfo
+            val cacheService = cloud.getServiceInfo("workshop-cache") as PCCServiceInfo
+
             val factory = ClientCacheFactory();
-            for ( locator in cacheService.getLocators()) {
+            for ( locator in cacheService.locators ?: emptyArray<URI>()) {
                 factory.addPoolLocator(locator.getHost(), locator.getPort());
             }
             factory.set(SECURITY_CLIENT, "io.pivotal.cambridge.pccworkshop.config.UserAuthInitialize.create");

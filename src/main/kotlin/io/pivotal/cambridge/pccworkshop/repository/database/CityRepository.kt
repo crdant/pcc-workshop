@@ -15,6 +15,10 @@ import org.springframework.cache.annotation.Cacheable;
 interface CityRepository : PagingAndSortingRepository<City, Long> {
     @Cacheable("cities")
     @RestResource(path = "name", rel = "name")
+    override fun findAll(): Page<City>
+
+    @Cacheable("cities")
+    @RestResource(path = "name", rel = "name")
     fun findByNameIgnoreCase(@Param("q") name: String, pageable: Pageable): Page<City>
 
     @Cacheable("cities")

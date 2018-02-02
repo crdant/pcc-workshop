@@ -2,6 +2,8 @@ buildscript {
 	ext {
 		kotlinVersion = '1.2.20'
 		springBootVersion = '2.0.0.RC1'
+        springConnectorVersion = '1.0.0.RELEASE'
+        cloudConnectorVersion = '1.0.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -44,19 +46,17 @@ configurations {
 }
 
 dependencies {
-	compile 'org.springframework.data:spring-data-geode'
     compile('org.springframework.boot:spring-boot-starter-web')
-    compile('org.springframework.boot:spring-boot-starter-log4j2')
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-	compile('org.springframework.cloud:spring-cloud-cloudfoundry-connector:2.0.1.RELEASE')
-	compile('io.pivotal.spring.cloud:spring-cloud-gemfire-cloudfoundry-connector:1.2.0.RELEASE')
-	compile('io.pivotal.spring.cloud:spring-cloud-gemfire-spring-connector:1.2.0.RELEASE')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-cache')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-data-gemfire:1.5.9.RELEASE')
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
-	compile 'org.springframework.data:spring-data-geode'
+	compile('org.springframework.boot:spring-boot-starter-log4j2')
+    compile("io.pivotal.spring.cloud:spring-cloud-gemfire-spring-connector:$springConnectorVersion")
+	compile("io.pivotal.spring.cloud:spring-cloud-gemfire-cloudfoundry-connector:$cloudConnectorVersion")
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
-  // compile("io.pivotal.gemfire:geode-core:9.0.4")
 	runtime('com.h2database:h2')
   runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')

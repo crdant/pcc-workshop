@@ -39,7 +39,7 @@ class UserAuthInitialize : AuthInitialize {
         private val USERNAME = "security-username"
         private val PASSWORD = "security-password"
 
-        fun create(): AuthInitialize {
+        @JvmStatic fun create(): AuthInitialize {
             return UserAuthInitialize()
         }
     }

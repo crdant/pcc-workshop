@@ -1,10 +1,12 @@
 package io.pivotal.cambridge.pccworkshop.domain
 
+import org.springframework.data.gemfire.mapping.annotation.Region
 import javax.persistence.*
 
 
 @Entity
 @Table(name = "city")
+@Region("cities")
 data class City (
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
