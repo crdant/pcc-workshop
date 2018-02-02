@@ -1,0 +1,7 @@
+---
+management:
+  endpoints:
+    web:
+      expose: "*"
+    security:
+      enabled: false
