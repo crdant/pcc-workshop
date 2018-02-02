@@ -1,4 +1,4 @@
-package io.pivotal.cambridge.pccworkshop.repository
+package io.pivotal.cambridge.pccworkshop.repository.database
 
 
 import org.springframework.data.repository.PagingAndSortingRepository
