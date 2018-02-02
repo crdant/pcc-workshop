@@ -2,6 +2,8 @@ buildscript {
 	ext {
 		kotlinVersion = '1.2.20'
 		springBootVersion = '2.0.0.RC1'
+        springConnectorVersion = '1.0.0.RELEASE'
+        cloudConnectorVersion = '1.0.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -37,14 +39,20 @@ repositories {
 	maven { url "https://repo.spring.io/milestone" }
 }
 
+configurations {
+    compile.exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-cache')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-data-gemfire')
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
-	compile('org.springframework.session:spring-session-core')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-log4j2')
+    compile("io.pivotal.spring.cloud:spring-cloud-gemfire-spring-connector:$springConnectorVersion")
+	compile("io.pivotal.spring.cloud:spring-cloud-gemfire-cloudfoundry-connector:$cloudConnectorVersion")
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compile("org.jetbrains.kotlin:kotlin-reflect")
 	runtime('com.h2database:h2')
